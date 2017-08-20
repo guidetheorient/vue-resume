@@ -1,0 +1,20 @@
+{
+  "name": "vue-resume",
+  "version": "0.1.0",
+  "description": "an online resume editor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guidetheorient/vue-resume.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/guidetheorient/vue-resume/issues"
+  },
+  "homepage": "https://github.com/guidetheorient/vue-resume#readme"
+}
