@@ -2,10 +2,7 @@
     <div id="editor">
         <nav>
             <ol>
-                <li v-for="i in [0,1,2,3,4,5]"
-                    v-bind:class="{active:currentTab === i}"
-                    v-on:click="currentTab = i"
-                >
+                <li v-for="i in tabCount" v-bind:class="{ active:currentTab === i }" v-on:click="currentTab = i">
                     <svg class="icon">
                         <use v-bind:xlink:href="'#icon-'+icons[i]"></use>
                     </svg>
@@ -14,21 +11,10 @@
         </nav>
         <ol class="panels">
             <li v-bind:class="{active:currentTab === 0}">
-                <h2>个人信息</h2>
-                <el-form>
-                  <el-form-item label="姓名">
-                    <el-input v-model="profile.name"></el-input>
-                  </el-form-item>
-                  <el-form-item label="城市">
-                    <el-input v-model="profile.city"></el-input>
-                  </el-form-item>
-                  <el-form-item label="出生年月">
-                    <el-input v-model="profile.birth"></el-input>
-                  </el-form-item>
-                </el-form>
+                <ProfileEditor v-bind:profile="profile"/>
             </li>
             <li v-bind:class="{active:currentTab === 1}">
-                <h2>工作经历</h2>
+                <WorkHistoryEditor v-bind:workHistory="workHistory"/>
             </li>
             <li v-bind:class="{active:currentTab === 2}">
                 <h2>学习经历</h2>
@@ -47,59 +33,103 @@
 </template>
 
 <script>
-    export default{
-        data(){
-            return {
-                currentTab: 0,
-                icons: ['shenfen','yinhang-copy','gongzuojingli','xiangmu','jiangbei','lianxifangshi'],
-                profile:{
-                    name:'',
-                    city:'',
-                    birth:''
-                }
+import ProfileEditor from "./ProfileEditor"
+import WorkHistoryEditor from "./WorkHistoryEditor"
+export default {
+    components:{
+        ProfileEditor,
+        WorkHistoryEditor
+    },
+    data() {
+        return {
+            currentTab: 0,
+            tabCount: this.initTabcount(),
+            icons: ['shenfen', 'yinhang-copy', 'gongzuojingli', 'xiangmu', 'jiangbei', 'lianxifangshi'],
+            profile: {
+                name: '',
+                city: '',
+                birth: ''
+            },
+            workHistory: [
+                { company: '', content: ''}
+            ]
+        }
+    },
+    methods: {
+        initTabcount: function() {
+            var count = [];
+            for (var i = 0; i < 6; i++) {
+                count[i] = i
             }
+            // console.log(count)
+            return count
         },
-        // created(){
-        //     setTimeout(() => {
-        //         console.log(this.profile)
-        //     },)
-        // }
+
     }
+    // created(){
+    //     setTimeout(() => {
+    //         console.log(this.profile)
+    //     },)
+    // }
+}
 </script>
 
 <style>
-    #editor{
-        min-height:100px;
-        display: flex;
-    }
-    #editor > nav{
-        background: #000;
-        width: 80px;
-    }
-    nav > ol > li{
-        padding: 16px 0;
-        text-align: center;
-    }
-    nav > ol > li > .icon{
-        width: 24px;
-        height: 24px;
-        fill: #fff;
-    }
-    nav > ol > li.active{
-        background: #fff;
-    }
-    nav > ol > li.active > .icon{
-        fill: #000;
-    }
-    .panels > li{
-        display: none;
-        padding: 32px;
-    }
-    .panels > li.active{
-        display: block;
-    }
-    .panels > li > el-form > el-input{
-        width: 100%;
-        background-color: red;
-    }
+#editor {
+    min-height: 100px;
+    display: flex;
+}
+
+#editor>nav {
+    background: #000;
+    width: 80px;
+}
+
+nav>ol>li {
+    padding: 16px 0;
+    text-align: center;
+}
+
+nav>ol>li>.icon {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+}
+
+nav>ol>li.active {
+    background: #fff;
+}
+
+nav>ol>li.active>.icon {
+    fill: #000;
+}
+.panels{
+    overflow: auto;
+    flex: 1;
+}
+.panels>li {
+    display: none;
+    padding: 32px;
+}
+
+.panels>li.active {
+    display: block;
+}
+
+.panels>li>el-form>el-input {
+    width: 100%;
+    background-color: red;
+}
+.one-work-history{
+    position: relative;
+}
+.one-work-history> .el-icon-close{
+    position: absolute;
+    right: 0;
+    top:0;
+    font-size: 12px;
+    line-height: 20px;
+    z-index: 1;
+    cursor: pointer;
+}
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <Topbar class="topbar"/>
+    <Topbar class="topbar" />
     <main>
-      <Editor class="editor"/>
-      <Preview class="preview"/>  
+      <Editor class="editor" />
+      <Preview class="preview" />
     </main>
   </div>
 </template>
@@ -15,16 +15,19 @@ import Preview from './components/Preview'
 
 export default {
   components: {
-    Topbar,Editor,Preview
+    Topbar, Editor, Preview
   }
 }
 </script>
 
 <style>
-html,body,#app{
+html,
+body,
+#app {
   height: 100%;
   overflow: hidden;
 }
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,30 +35,36 @@ html,body,#app{
   display: flex;
   flex-direction: column;
 }
-.topbar{
+
+.topbar {
   position: relative;
   z-index: 1;
-  box-shadow: 0 0 3px hsla(0,0,0,0.5);
+  box-shadow: 0 0 3px hsla(0, 0, 0, 0.5);
 }
-main{
+
+main {
   display: flex;
   flex: 1;
   background: #eee;
 }
-.editor{
+
+.editor {
   width: 40em;
   margin: 16px 8px 16px 16px;
   background: #fff;
 }
-.preview{
+
+.preview {
   flex: 1;
   margin: 16px 16px 16px 8px;
   background: #fff;
 }
-.icon{
-   width: 1em; height: 1em;
-   vertical-align: -0.15em;
-   fill: currentColor;
-   overflow: hidden;
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>
