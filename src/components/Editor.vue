@@ -11,22 +11,22 @@
         </nav>
         <ol class="panels">
             <li v-bind:class="{active:currentTab === 0}">
-                <ProfileEditor v-bind:profile="profile"/>
+                <ProfileEditor v-bind:profile="resume.profile" />
             </li>
             <li v-bind:class="{active:currentTab === 1}">
-                <itemHistoryEditor v-bind:items="workHistory" v-bind:labels="{company:'公司',content:'工作内容'}" title="工作经历"/>
+                <itemHistoryEditor v-bind:items="resume.workHistory" v-bind:labels="{company:'公司',content:'工作内容'}" title="工作经历"/>
             </li>
             <li v-bind:class="{active:currentTab === 2}">
-                <itemHistoryEditor v-bind:items="studyHistory" v-bind:labels="{school:'学校',degree:'学历',duration:'时间'}" title="学习经历"/>
+                <itemHistoryEditor v-bind:items="resume.studyHistory" v-bind:labels="{school:'学校',degree:'学历',duration:'时间'}" title="学习经历"/>
             </li>
             <li v-bind:class="{active:currentTab === 3}">
-                <itemHistoryEditor v-bind:items="projects" v-bind:labels="{name:'项目名称',content:'项目内容'}" title="项目经历"/>            
+                <itemHistoryEditor v-bind:items="resume.projects" v-bind:labels="{name:'项目名称',content:'项目内容'}" title="项目经历"/>            
             </li>
             <li v-bind:class="{active:currentTab === 4}">
-                <itemHistoryEditor v-bind:items="awards" v-bind:labels="{name:'奖项'}" title="获奖信息"/>
+                <itemHistoryEditor v-bind:items="resume.awards" v-bind:labels="{name:'奖项'}" title="获奖信息"/>
             </li>
             <li v-bind:class="{active:currentTab === 5}">
-                <ContactsEditor v-bind:contacts="contacts"/>                
+                <ContactsEditor v-bind:contacts="resume.contacts"/>                
             </li>
         </ol>
     </div>
@@ -42,31 +42,12 @@ export default {
         itemHistoryEditor,
         ContactsEditor
     },
+    props:['resume'],
     data() {
         return {
             currentTab: 0,
             tabCount: this.initTabcount(),
             icons: ['shenfen', 'yinhang-copy', 'gongzuojingli', 'xiangmu', 'jiangbei', 'lianxifangshi'],
-            profile: {
-                name: '',
-                city: '',
-                birth: ''
-            },
-            workHistory: [
-                { company: '', content: ''}
-            ],
-            studyHistory:[
-                {school:'',degree:'',duration:''}
-            ],
-            projects:[
-                {name:'',content:''}
-            ],
-            awards:[
-                {name:''}
-            ],
-            contacts:[
-                {phone:'',qq:'',wechat:'',email:''}
-            ]
         }
     },
     methods: {
