@@ -2,7 +2,7 @@
   <div>
     <h2>学习经历</h2>
     <el-form>
-      <div v-for="(item,index) in items" class="one-work-history">
+      <div v-for="(item,index) in items" class="one-work-history" :key="item">
         <i v-on:click="removeItem(index)" class="el-icon-close"></i>
         <el-form-item label="学校">
           <el-input v-model="items.school"></el-input>

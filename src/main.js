@@ -9,6 +9,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(ElementUI)
+//为什么ElementUI在main.js中import后其他模块可以使用
+//leanclound却不行
+
 
 Vue.config.productionTip = false
 
