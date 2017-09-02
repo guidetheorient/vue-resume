@@ -64,6 +64,7 @@ export default {
     },
     created() {
         this.currentUser = this.getCurrentUser()
+        this.fetchResumeContent()
     },
     methods: {
         preview() {
@@ -72,21 +73,19 @@ export default {
         fetchResumeContent() {
             if (this.currentUser) {
                 var query = new AV.Query('Resumefolder')
-                console.log(query.length,11)
                 query.find()
                     .then((resume) => {
-                        console.log(resume,22)
-                        console.log(resume.length)
                         let avResume = resume[0]
                         let id = avResume.id
                         this.resumeContent = JSON.parse(avResume.attributes.content)
                         console.log(this.resumeContent,33)
                         this.resumeContent.id = id
+                        this.$emit('update:resume',this.resumeContent)
                     }, function(error) {
                         console.error(error)
                     })
             }
-            this.$emit('update:resume',this.resumeContent)
+            
         },
         signUp() {
             this.signUpDialogVisible = false;
