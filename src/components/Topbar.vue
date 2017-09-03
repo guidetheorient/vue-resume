@@ -1,7 +1,10 @@
 <template>
     <div id="topbar">
         <div class="logo">
-            VueResume
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-jianliguanli"></use>
+            </svg>
+            在线简历编辑器
         </div>
         <div class="actions">
             <el-button type="primary" @click="signUpDialogVisible = true" v-if="!currentUser">注册</el-button>
@@ -59,7 +62,7 @@ export default {
                 password: '',
             },
             formLabelWidth: '120px',
-            resumeContent:''
+            resumeContent: ''
         }
     },
     created() {
@@ -78,14 +81,14 @@ export default {
                         let avResume = resume[0]
                         let id = avResume.id
                         this.resumeContent = JSON.parse(avResume.attributes.content)
-                        console.log(this.resumeContent,33)
+                        console.log(this.resumeContent, 33)
                         this.resumeContent.id = id
-                        this.$emit('update:resume',this.resumeContent)
+                        this.$emit('update:resume', this.resumeContent)
                     }, function(error) {
                         console.error(error)
                     })
             }
-            
+
         },
         signUp() {
             this.signUpDialogVisible = false;
@@ -125,10 +128,10 @@ export default {
             this.currentUser = null
             window.location.reload()
         },
-        saveOrUpdateResume:function () {
-            if(this.resume.id){
+        saveOrUpdateResume: function() {
+            if (this.resume.id) {
                 this.updateResumeContent()
-            }else{
+            } else {
                 this.saveResumeContent()
             }
         },
@@ -153,11 +156,11 @@ export default {
                 alert('保存失败')
             })
         },
-        updateResumeContent:function () {
+        updateResumeContent: function() {
             let session = JSON.stringify(this.resume)
-            let avResume = AV.Object.createWithoutData('Resumefolder',this.resume.id)
-            avResume.set('content',session)
-            avResume.save().then(()=>{
+            let avResume = AV.Object.createWithoutData('Resumefolder', this.resume.id)
+            avResume.set('content', session)
+            avResume.save().then(() => {
                 console.log('更新成功')
             })
         },
@@ -172,5 +175,10 @@ export default {
     align-items: center;
     padding: 16px;
     font-size: 20px;
+    color: #fff;
+    background-color: #20a0ff;
+}
+#topbar > .logo .icon{
+    fill:#fff;
 }
 </style>
