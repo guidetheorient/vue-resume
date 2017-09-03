@@ -7,10 +7,11 @@
             在线简历编辑器
         </div>
         <div class="actions">
-            <el-button type="primary" @click="signUpDialogVisible = true" v-if="!currentUser">注册</el-button>
-            <el-button @click="loginDialogVisible = true" v-if="!currentUser">登录</el-button>
-            <el-button v-on:click="preview">预览</el-button>
-            <el-button @click="saveOrUpdateResume">保存</el-button>
+            <el-button class="text-button" type="text" @click="signUpDialogVisible = true" v-if="!currentUser">注册</el-button>
+            <span class="vertical-line">|</span>
+            <el-button class="text-button" type="text" @click="loginDialogVisible = true" v-if="!currentUser">登录</el-button>
+            <el-button type="success" v-on:click="preview">预览</el-button>
+            <el-button @click="saveOrUpdateResume" v-if="currentUser">保存</el-button>
             <el-button @click="logout" v-if="currentUser">登出</el-button>
         </div>
         <el-dialog v-if="!currentUser" class="login" title="注册" :visible.sync="signUpDialogVisible" :modal-append-to-body="false">
@@ -174,11 +175,25 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 16px;
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: 500;
     color: #fff;
-    background-color: #20a0ff;
+    background-color: #1D8CE0;
+}
+#topbar > .logo{
+    font-family: 'KaiTi';
 }
 #topbar > .logo .icon{
     fill:#fff;
+    font-size: 40px;
+    vertical-align: -0.28em;    
 }
+#topbar .text-button{
+    color:#fff;
+}
+#topbar .text-button+.vertical-line{
+    font-size: 20px;
+    word-spacing: 0.4em;
+}
+
 </style>

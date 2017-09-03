@@ -86,14 +86,15 @@
 
   .editor {
     width: 40em;
-    margin: 16px 8px 16px 16px;
+    margin: 0px 0px 0px 0px;
     background: #fff;
   }
 
   .preview {
     flex: 1;
-    margin: 16px 16px 16px 8px;
-    background: #fff;
+    margin: 0px 0px 0px 0px;
+    background: #fcfaf2;
+    border-left: 1px solid #d9d9d9
   }
 
   .icon {

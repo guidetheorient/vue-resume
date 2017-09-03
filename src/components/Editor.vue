@@ -1,11 +1,12 @@
 <template>
   <div id="editor">
-    <nav>
+    <nav class="sidebar">
       <ol>
         <li v-for="i in tabCount" v-bind:class="{ active:currentTab === i }" v-on:click="currentTab = i" :key="i">
-          <svg class="icon">
+          <svg class="icon" v-bind:class="'icon-'+icons[i]">
             <use v-bind:xlink:href="'#icon-'+icons[i]"></use>
           </svg>
+          <p class="tip">{{infoType[i]}}</p>
         </li>
       </ol>
     </nav>
@@ -14,16 +15,16 @@
         <ProfileEditor v-bind:profile="resume.profile" />
       </li>
       <li v-bind:class="{active:currentTab === 1}">
-        <itemHistoryEditor v-bind:items="resume.workHistory" v-bind:labels="{company:'公司',content:'工作内容'}" title="工作经历" />
+        <itemHistoryEditor v-bind:items="resume.workHistory" v-bind:labels="{company:'公司',content:'工作内容'}" title="工作经历" />        
       </li>
       <li v-bind:class="{active:currentTab === 2}">
-        <itemHistoryEditor v-bind:items="resume.studyHistory" v-bind:labels="{school:'学校',degree:'学历',duration:'时间'}" title="学习经历" />
+        <itemHistoryEditor v-bind:items="resume.projects" v-bind:labels="{name:'项目名称',content:'项目内容'}" title="项目经历" />        
       </li>
       <li v-bind:class="{active:currentTab === 3}">
-        <itemHistoryEditor v-bind:items="resume.projects" v-bind:labels="{name:'项目名称',content:'项目内容'}" title="项目经历" />
+        <itemHistoryEditor v-bind:items="resume.studyHistory" v-bind:labels="{school:'学校',degree:'学历',duration:'时间'}" title="学习经历" />        
       </li>
       <li v-bind:class="{active:currentTab === 4}">
-        <itemHistoryEditor v-bind:items="resume.awards" v-bind:labels="{name:'奖项'}" title="获奖信息" />
+        <itemHistoryEditor v-bind:items="resume.awards" v-bind:labels="{name:'奖项'}" title="获奖情况" />
       </li>
       <li v-bind:class="{active:currentTab === 5}">
         <ContactsEditor v-bind:contacts="resume.contacts" />
@@ -47,7 +48,8 @@ export default {
     return {
       currentTab: 0,
       tabCount: this.initTabcount(),
-      icons: ['shenfen', 'yinhang-copy', 'gongzuojingli', 'xiangmu', 'jiangbei', 'lianxifangshi'],
+      icons: ['shenfen',  'gongzuojingli', 'xiangmu2', 'yinhang-copy','jiangbei', 'lianxifangshi'],
+      infoType:['个人信息','工作经历','项目经历','学习经历','获奖情况','联系方式']
     }
   },
   methods: {
@@ -75,28 +77,45 @@ export default {
   display: flex;
 }
 
-#editor>nav {
-  background: #000;
+#editor>.sidebar {
+  background: #1F2D3D;
   width: 80px;
 }
 
-nav>ol>li {
-  padding: 16px 0;
+.sidebar>ol>li {
+  height: 72px;
+  /* padding: 16px 0; */
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items:center;
+  flex: 1;
 }
-
-nav>ol>li>.icon {
+.sidebar>ol>li:first-child{
+  margin-top: 16px;
+}
+.sidebar>ol>li>.icon {
   width: 24px;
   height: 24px;
   fill: #fff;
 }
-
-nav>ol>li.active {
+.sidebar .tip{
+  margin-top: 5px;
+  font-size: 12px;
+  transition: .5s;
+  display: none;
+}
+.sidebar:hover .tip{
+  display: block;
+  color:#8492A6
+}
+.sidebar>ol>li.active {
   background: #fff;
 }
 
-nav>ol>li.active>.icon {
-  fill: #000;
+.sidebar>ol>li.active>.icon {
+  fill: #1F2D3D;
 }
 
 .panels {
@@ -131,4 +150,15 @@ nav>ol>li.active>.icon {
   z-index: 1;
   cursor: pointer;
 }
+
+#editor .icon-shenfen {
+  width: 28px;
+  height: 28px;
+}
+
+
+/* #editor .icon-xiangmu---{
+  width: 28px;
+  height: 28px;
+} */
 </style>
