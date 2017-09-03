@@ -15,16 +15,16 @@
         <ProfileEditor v-bind:profile="resume.profile" />
       </li>
       <li v-bind:class="{active:currentTab === 1}">
-        <itemHistoryEditor v-bind:items="resume.workHistory" v-bind:labels="{company:'公司',content:'工作内容'}" title="工作经历" />        
+        <workAndProjectHistoryEditor v-bind:items="resume.workHistory" v-bind:labels="{company:'公司',content:'工作内容'}" title="工作经历" />
       </li>
       <li v-bind:class="{active:currentTab === 2}">
-        <itemHistoryEditor v-bind:items="resume.projects" v-bind:labels="{name:'项目名称',content:'项目内容'}" title="项目经历" />        
+        <workAndProjectHistoryEditor v-bind:items="resume.projects" v-bind:labels="{name:'项目名称',content:'项目内容'}" title="项目经历" />        
       </li>
       <li v-bind:class="{active:currentTab === 3}">
-        <itemHistoryEditor v-bind:items="resume.studyHistory" v-bind:labels="{school:'学校',degree:'学历',duration:'时间'}" title="学习经历" />        
+        <itemHistoryEditor v-bind:items="resume.studyHistory" v-bind:labels="{school:'学校',degree:'学历',duration:'时间'}" title="学习经历" />
       </li>
       <li v-bind:class="{active:currentTab === 4}">
-        <itemHistoryEditor v-bind:items="resume.awards" v-bind:labels="{name:'奖项'}" title="获奖情况" />
+        <itemHistoryEditor v-bind:items="resume.awards" v-bind:labels="{name:'奖项',content:'描述'}" title="获奖情况" />
       </li>
       <li v-bind:class="{active:currentTab === 5}">
         <ContactsEditor v-bind:contacts="resume.contacts" />
@@ -34,41 +34,43 @@
 </template>
 
 <script>
-import ProfileEditor from "./ProfileEditor"
-import itemHistoryEditor from "./itemHistoryEditor"
-import ContactsEditor from "./Contacts"
-export default {
-  components: {
-    ProfileEditor,
-    itemHistoryEditor,
-    ContactsEditor
-  },
-  props: ['resume'],
-  data() {
-    return {
-      currentTab: 0,
-      tabCount: this.initTabcount(),
-      icons: ['shenfen',  'gongzuojingli', 'xiangmu2', 'yinhang-copy','jiangbei', 'lianxifangshi'],
-      infoType:['个人信息','工作经历','项目经历','学习经历','获奖情况','联系方式']
-    }
-  },
-  methods: {
-    initTabcount: function() {
-      var count = [];
-      for (var i = 0; i < 6; i++) {
-        count[i] = i
-      }
-      // console.log(count)
-      return count
+  import ProfileEditor from "./ProfileEditor"
+  import itemHistoryEditor from "./itemHistoryEditor"
+  import workAndProjectHistoryEditor from "./workAndProjectHistoryEditor"
+  import ContactsEditor from "./Contacts"
+  export default {
+    components: {
+      ProfileEditor,
+      itemHistoryEditor,
+      ContactsEditor,
+      workAndProjectHistoryEditor
     },
+    props: ['resume'],
+    data() {
+      return {
+        currentTab: 0,
+        tabCount: this.initTabcount(),
+        icons: ['shenfen',  'gongzuojingli', 'xiangmu2', 'yinhang-copy','jiangbei', 'lianxifangshi'],
+        infoType:['个人信息','工作经历','项目经历','学习经历','获奖情况','联系方式']
+      }
+    },
+    methods: {
+      initTabcount: function() {
+        var count = [];
+        for (var i = 0; i < 6; i++) {
+          count[i] = i
+        }
+        // console.log(count)
+        return count
+      },
 
+    }
+    // created(){
+    //     setTimeout(() => {
+    //         console.log(this.profile)
+    //     },)
+    // }
   }
-  // created(){
-  //     setTimeout(() => {
-  //         console.log(this.profile)
-  //     },)
-  // }
-}
 </script>
 
 <style>
@@ -134,7 +136,6 @@ export default {
 
 .panels>li>el-form>el-input {
   width: 100%;
-  background-color: red;
 }
 
 .one-work-history {
@@ -151,9 +152,19 @@ export default {
   cursor: pointer;
 }
 
+.one-work-history>.el-icon-close::before{
+  
+  z-index: 1;
+}
+
 #editor .icon-shenfen {
   width: 28px;
   height: 28px;
+}
+
+div>h3:first-child{
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
 

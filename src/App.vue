@@ -5,7 +5,7 @@
       <Editor class="editor" v-bind:resume="resume"/>
       <Preview class="preview" v-bind:resume="resume"/>
     </main>
-    <el-button id="exit-preview" v-on:click="exitPreview">退出预览</el-button>
+    <el-button type="success" id="exit-preview" v-on:click="exitPreview">退出预览</el-button>
   </div>
 </template>
 
@@ -45,10 +45,10 @@
             { name: '', content: '' }
           ],
           awards: [
-            { name: '' }
+            { name: '', content: '' }
           ],
           contacts: {
-            phone: '', qq: '', wechat: '', email: ''
+            phone: '', email: '', qq: '', github: ''
           }
         }
       }
@@ -74,7 +74,7 @@
 
   .topbar {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     box-shadow: 0 0 3px hsla(0, 0, 0, 0.5);
   }
 
@@ -85,7 +85,7 @@
   }
 
   .editor {
-    width: 40em;
+    width: 35em;
     margin: 0px 0px 0px 0px;
     background: #fff;
   }
@@ -94,7 +94,8 @@
     flex: 1;
     margin: 0px 0px 0px 0px;
     background: #fcfaf2;
-    border-left: 1px solid #d9d9d9
+    border-left: 1px solid #d9d9d9;
+    overflow: auto;
   }
 
   .icon {
@@ -104,6 +105,10 @@
     fill: currentColor;
     overflow: hidden;
   }
+  #app.previewMode{
+    display: flex;
+    overflow: auto;
+  }
   .previewMode #topbar{
     display: none;
   }
@@ -112,6 +117,7 @@
   }
   .previewMode #preview{
     max-width: 800px;
+    min-width: 800px;
     margin: 10px auto;
   }
   #exit-preview{

@@ -8,13 +8,13 @@
         </div>
         <div class="actions">
             <el-button class="text-button" type="text" @click="signUpDialogVisible = true" v-if="!currentUser">注册</el-button>
-            <span class="vertical-line">|</span>
+            <span class="vertical-line" v-if="!currentUser">|</span>
             <el-button class="text-button" type="text" @click="loginDialogVisible = true" v-if="!currentUser">登录</el-button>
             <el-button type="success" v-on:click="preview">预览</el-button>
             <el-button @click="saveOrUpdateResume" v-if="currentUser">保存</el-button>
             <el-button @click="logout" v-if="currentUser">登出</el-button>
         </div>
-        <el-dialog v-if="!currentUser" class="login" title="注册" :visible.sync="signUpDialogVisible" :modal-append-to-body="false">
+        <el-dialog v-if="!currentUser" size="tiny" class="login" title="注册" :visible.sync="signUpDialogVisible" :modal-append-to-body="false">
             <el-form :model="form">
                 <el-form-item label="用户名">
                     <el-input v-model="form.username"></el-input>
@@ -28,7 +28,7 @@
                 <el-button type="primary" @click="signUp">注 册</el-button>
             </div>
         </el-dialog>
-        <el-dialog v-if="!currentUser" class="login" title="登录" :visible.sync="loginDialogVisible" :modal-append-to-body="false">
+        <el-dialog v-if="!currentUser" size="tiny" class="login" title="登录" :visible.sync="loginDialogVisible" :modal-append-to-body="false">
             <el-form :model="form">
                 <el-form-item label="用户名">
                     <el-input v-model="loginForm.username"></el-input>
