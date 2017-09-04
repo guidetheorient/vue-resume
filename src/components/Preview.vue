@@ -16,7 +16,7 @@
                     <li>城&nbsp;&nbsp;&nbsp;&nbsp;市:
                         <span>{{resume.profile.city || '城市'}}</span>
                     </li>
-                    <li>出生年月:
+                    <li><span>出生年月:</span>
                         <span>{{resume.profile.birth || '出生年月'}}</span>
                     </li>
                     <li>手&nbsp;&nbsp;&nbsp;&nbsp;机:
@@ -33,84 +33,66 @@
                     </li>
                 </ul>
             </section>
-            <section class="work-history">
+            <section class="work-history" v-if="filter(resume.workHistory).length > 0">
                 <div class="info-title">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-gongzuojingli"></use>
                     </svg>
                     <span class="title">工作经历</span>
                 </div>
-                <ul class="one-work-history">
+                <ul v-for="(item,index) in resume.workHistory" :key="index" class="one-work-history">
                     <li class="work-title">
-                        <p class="duration">2012年至今</p>
-                        <p class="company">鸡飞狗跳公司</p>
-                        <p class="job">实习生</p>
+                        <p class="duration">{{item.duration}}</p>
+                        <p class="company">{{item.company}}</p>
                     </li>
-                    <li class="work-content">公司总部设在XXXX区，先后在北京、上海成立分公司。专注于移动XXX领域，主打产品XXXXX，它将资讯、报纸、杂志、图片、微信等众多内容，按照用户意愿聚合到一起，实现深度个性化 定制。我的主要工作如下:1. 完成既定产品需求。2. 修复 bug。</li>
+                    <li class="work-content">{{item.content}}</li>
                 </ul>
             </section>
-            <section class="projects">
+            <section class="projects" v-if="filter(resume.projects).length > 0">
                 <div class="info-title">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-xiangmu2"></use>
                     </svg>
                     <span class="title">项目经历</span>
                 </div>
-                <ul class="one-work-history">
+                <ul v-for="(item,index) in resume.projects" :key="index" class="one-work-history">
                     <li class="work-title">
-                        <p class="company">鸡飞狗跳项目</p>
+                        <p class="company">{{item.name}}</p>
                     </li>
-                    <li class="work-content">公司总部设在XXXX区，先后在北京、上海成立分公司。专注于移动XXX领域，主打产品XXXXX，它将资讯、报纸、杂志、图片、微信等众多内容，按照用户意愿聚合到一起，实现深度个性化 定制。我的主要工作如下:1. 完成既定产品需求。2. 修复 bug。</li>
-                </ul>
-                <ul class="one-work-history">
-                    <li class="work-title">
-                        <p class="company">鸡飞狗跳项目</p>
-                    </li>
-                    <li class="work-content">公司总部设在XXXX区，先后在北京、上海成立分公司。专注于移动XXX领域，主打产品XXXXX，它将资讯、报纸、杂志、图片、微信等众多内容，按照用户意愿聚合到一起，实现深度个性化 定制。我的主要工作如下:1. 完成既定产品需求。2. 修复 bug。</li>
+                    <li class="work-content">{{item.content}}</li>
                 </ul>
             </section>
-            <section class="study-history">
+            <section class="study-history" v-if="filter(resume.studyHistory).length > 0">
                 <div class="info-title">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-yinhang-copy"></use>
                     </svg>
                     <span class="title">学习经历</span>
                 </div>
-                <ul class="one-work-history">
+                <ul v-for="(item,index) in resume.studyHistory" :key="index" class="one-work-history">
                     <li class="work-title">
-                        <p class="duration">2012年至今</p>
-                        <p class="company">鸡飞狗跳公司</p>
-                        <p class="job">实习生</p>
+                        <p>{{item.duration}}</p>
+                        <p>{{item.school}}</p>
+                        <p>{{item.degree}}</p>
                     </li>
-                    <li class="work-content">公司总部设在XXXX区，先后在北京、上海成立分公司。专注于移动XXX领域，主打产品XXXXX，它将资讯、报纸、杂志、图片、微信等众多内容，按照用户意愿聚合到一起，实现深度个性化 定制。我的主要工作如下:1. 完成既定产品需求。2. 修复 bug。</li>
+                    <li class="work-content"></li>
                 </ul>
             </section>
-            <section class="awards">
+            <section class="awards" v-if="filter(resume.awards).length > 0">
                 <div class="info-title">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-jiangbei"></use>
                     </svg>
                     <span class="title">获奖情况</span>
                 </div>
-                 <ul class="one-work-history">
+                <ul v-for="(item,index) in resume.awards" :key="index" class="one-work-history">
                     <li class="work-title">
-                        <p class="company">鸡飞狗跳奖</p>
+                        <p>{{item.name}}</p>
                     </li>
-                    <li class="work-content">公司总部设在XXXX区，先后在北京、上海成立分公司。专注于移动XXX领域，主打产品XXXXX，它将资讯、报纸、杂志、图片、微信等众多内容，按照用户意愿聚合到一起，实现深度个性化 定制。我的主要工作如下:1. 完成既定产品需求。2. 修复 bug。</li>
-                </ul>
-                <ul class="one-work-history">
-                    <li class="work-title">
-                        <p class="company">鸡飞狗跳奖</p>
-                    </li>
-                    <li class="work-content">公司总部设在XXXX区，先后在北京、上海成立分公司。专注于移动XXX领域，主打产品XXXXX，它将资讯、报纸、杂志、图片、微信等众多内容，按照用户意愿聚合到一起，实现深度个性化 定制。我的主要工作如下:1. 完成既定产品需求。2. 修复 bug。</li>
+                    <li class="work-content">{{item.content}}</li>
                 </ul>
             </section>
             <section v-if="filter(resume.workHistory).length > 0">
-                <ul>
-                    <li v-for="item in filter(resume.workHistory)">
-                        {{item.name}} {{item.content}}
-                    </li>
-                </ul>
             </section>
         </div>
 

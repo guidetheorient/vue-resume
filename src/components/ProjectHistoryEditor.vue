@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>{{title}}</h3>
-    <el-form>
+    <el-form class="form">
       <div v-for="(item,index) in items" class="one-work-history" :key="index">
         <i v-on:click="removeItem(index)" class="el-icon-close"></i>
         <el-form-item v-bind:label="labels[keys[0]] || key">
@@ -32,7 +32,9 @@ export default {
       this.items.push(empty)
     },
     removeItem(index) {
-      this.items.splice(index, 1)
+      if (this.items.length>1){
+        this.items.splice(index, 1)        
+      }
     }
   }
 }

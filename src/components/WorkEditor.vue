@@ -4,8 +4,14 @@
     <el-form class="form">
       <div v-for="(item,index) in items" class="one-work-history" :key="index">
         <i v-on:click="removeItem(index)" class="el-icon-close"></i>
-        <el-form-item v-for="key in keys" v-bind:label="labels[key] || key" :key="key">
-          <el-input v-model="item[key]"></el-input>
+        <el-form-item v-bind:label="labels[keys[0]] || key">
+          <el-input v-model="item[keys[0]]"></el-input>
+        </el-form-item>
+        <el-form-item v-bind:label="labels[keys[1]] || key">
+          <el-input v-model="item[keys[1]]"></el-input>
+        </el-form-item>
+        <el-form-item v-bind:label="labels[keys[2]] || key">
+          <el-input type="textarea" v-model="item[keys[2]]" :autosize="{ minRows: 2, maxRows: 15}"></el-input>
         </el-form-item>
       </div>
       <el-button type="primary" v-on:click="addItem">再添一项</el-button>

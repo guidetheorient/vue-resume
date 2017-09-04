@@ -2,7 +2,7 @@
   <div id="app" v-bind:class="{previewMode:previewMode}">
     <Topbar class="topbar" v-on:preview="enterPreview" :resume.sync="resume"/>
     <main>
-      <Editor class="editor" v-bind:resume="resume"/>
+      <Editor class="editor" v-bind:resume="resume" :resume.sync="resume"/>
       <Preview class="preview" v-bind:resume="resume"/>
     </main>
     <el-button type="success" id="exit-preview" v-on:click="exitPreview">退出预览</el-button>
@@ -24,6 +24,13 @@
       },
       exitPreview(){
         this.previewMode = false
+      },
+      getTime(time){
+        let year = time.getFullYear()
+        let month = time.getMonth()
+        let day = time.getDay()
+        return 1
+        return year+'-'+month
       }
     },
     data() {
@@ -33,10 +40,10 @@
           profile: {
             name: '',
             city: '',
-            birth: ''
+            birth: '',
           },
           workHistory: [
-            { company: '', content: '' }
+            { duration:'',company: '', content: '' }
           ],
           studyHistory: [
             { school: '', degree: '', duration: '' }
@@ -129,4 +136,7 @@
     right: 20px;
     bottom: 20px;
   }
+  /* .form > div:first-child >.el-icon-close{
+    display: none;
+  } */
 </style>

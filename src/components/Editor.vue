@@ -12,13 +12,15 @@
     </nav>
     <ol class="panels">
       <li v-bind:class="{active:currentTab === 0}">
-        <ProfileEditor v-bind:profile="resume.profile" />
+        <ProfileEditor v-bind:profile="resume.profile"/>
+        <!-- <ProfileEditor v-bind:profile="resume.profile" @changeBirth="change"/> -->
+        {{test}}
       </li>
       <li v-bind:class="{active:currentTab === 1}">
-        <workAndProjectHistoryEditor v-bind:items="resume.workHistory" v-bind:labels="{company:'公司',content:'工作内容'}" title="工作经历" />
+        <WorkEditor v-bind:items="resume.workHistory" v-bind:labels="{duration:'时间',company:'公司',content:'工作内容'}" title="工作经历" />
       </li>
       <li v-bind:class="{active:currentTab === 2}">
-        <workAndProjectHistoryEditor v-bind:items="resume.projects" v-bind:labels="{name:'项目名称',content:'项目内容'}" title="项目经历" />        
+        <ProjectHistoryEditor v-bind:items="resume.projects" v-bind:labels="{name:'项目名称',content:'项目内容'}" title="项目经历" />        
       </li>
       <li v-bind:class="{active:currentTab === 3}">
         <itemHistoryEditor v-bind:items="resume.studyHistory" v-bind:labels="{school:'学校',degree:'学历',duration:'时间'}" title="学习经历" />
@@ -36,18 +38,21 @@
 <script>
   import ProfileEditor from "./ProfileEditor"
   import itemHistoryEditor from "./itemHistoryEditor"
-  import workAndProjectHistoryEditor from "./workAndProjectHistoryEditor"
+  import WorkEditor from "./WorkEditor.vue"
+  import ProjectHistoryEditor from './ProjectHistoryEditor.vue'
   import ContactsEditor from "./Contacts"
   export default {
     components: {
       ProfileEditor,
       itemHistoryEditor,
       ContactsEditor,
-      workAndProjectHistoryEditor
+      WorkEditor,
+      ProjectHistoryEditor
     },
     props: ['resume'],
     data() {
       return {
+        test:'',
         currentTab: 0,
         tabCount: this.initTabcount(),
         icons: ['shenfen',  'gongzuojingli', 'xiangmu2', 'yinhang-copy','jiangbei', 'lianxifangshi'],
@@ -63,7 +68,9 @@
         // console.log(count)
         return count
       },
-
+      // change(msg){
+      //   this.test = msg
+      // }
     }
     // created(){
     //     setTimeout(() => {
@@ -136,6 +143,9 @@
 
 .panels>li>el-form>el-input {
   width: 100%;
+}
+.profile,.contacts{
+  margin:0 10px;
 }
 
 .one-work-history {

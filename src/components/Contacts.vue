@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>联系方式</h3>
-    <el-form>
+    <el-form class="contacts">
       <el-form-item label="手机">
         <el-input v-model="contacts.phone"></el-input>
       </el-form-item>

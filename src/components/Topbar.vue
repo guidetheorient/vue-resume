@@ -59,8 +59,8 @@ export default {
                 password: '',
             },
             loginForm: {
-                username: '',
-                password: '',
+                username: '2' || '',
+                password: '2' || '',
             },
             formLabelWidth: '120px',
             resumeContent: ''
@@ -69,6 +69,9 @@ export default {
     created() {
         this.currentUser = this.getCurrentUser()
         this.fetchResumeContent()
+        // if (this.currentUser) {
+        //     setTimeout(this.saveOrUpdateResume(),1000)
+        // }
     },
     methods: {
         preview() {
@@ -102,7 +105,17 @@ export default {
             user.signUp().then((loginedUser) => {
                 // console.log(loginedUser)
                 this.currentUser = this.getCurrentUser()
-            }, function(error) {
+                this.$message({
+                    message: '注册成功，已为您登录',
+                    duration: 1000,
+                    type:"success"
+                })
+            }, (error)=> {
+                this.$message({
+                    message: '用户名已存在',
+                    duration: 1000,
+                    type:"error"
+                })
                 console.log('注册失败')
             });
         },
@@ -110,9 +123,19 @@ export default {
             AV.User.logIn(this.loginForm.username, this.loginForm.password).then((loginedUser) => {
                 this.currentUser = this.getCurrentUser();
                 this.loginDialogVisible = false;
-                this.fetchResumeContent()
-            }, function(error) {
+                this.fetchResumeContent();
+                this.$message({
+                    message: '登录成功',
+                    duration: 1000,
+                    type:"success"
+                })
+            }, (error)=> {
                 console.log('登录失败')
+                this.$message({
+                    message: '用户名或密码错误',
+                    duration: 1000,
+                    type:'error'
+                })
             });
         },
         getCurrentUser() {
@@ -153,8 +176,17 @@ export default {
             resumefolder.save().then((resume) => {
                 this.resume.id = resume.id
                 console.log('保存成功')
-            }, function(error) {
+                this.$message({
+                    message: '保存成功',
+                    duration: 1000,
+                })
+            }, (error)=> {
                 alert('保存失败')
+                this.$message({
+                    message: '保存失败',
+                    duration: 1000,
+                    type:'waring'
+                })
             })
         },
         updateResumeContent: function() {
@@ -163,6 +195,10 @@ export default {
             avResume.set('content', session)
             avResume.save().then(() => {
                 console.log('更新成功')
+                this.$message({
+                    message: '保存成功',
+                    duration: 1000,
+                })
             })
         },
     }
@@ -180,20 +216,23 @@ export default {
     color: #fff;
     background-color: #1D8CE0;
 }
-#topbar > .logo{
+
+#topbar>.logo {
     font-family: 'KaiTi';
 }
-#topbar > .logo .icon{
-    fill:#fff;
+
+#topbar>.logo .icon {
+    fill: #fff;
     font-size: 40px;
-    vertical-align: -0.28em;    
+    vertical-align: -0.28em;
 }
-#topbar .text-button{
-    color:#fff;
+
+#topbar .text-button {
+    color: #fff;
 }
-#topbar .text-button+.vertical-line{
+
+#topbar .text-button+.vertical-line {
     font-size: 20px;
     word-spacing: 0.4em;
 }
-
 </style>
