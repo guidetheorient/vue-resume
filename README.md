@@ -1,17 +1,21 @@
 # vue-resume
 
-> yes
+## 预览
+
+[预览链接](https://guidetheorient.github.io/vue-resume/dist/)
+[源码入口](https://github.com/guidetheorient/vue-resume/blob/master/src/App.vue)
+
 
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 启动本地服务器localhost:8080（热重载）
 npm run dev
 
-# build for production with minification
+# 生成生产文件
 npm run build
 
 # build for production and view the bundle analyzer report
