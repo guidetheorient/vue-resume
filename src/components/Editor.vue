@@ -1,12 +1,12 @@
 <template>
   <div id="editor">
-    <nav class="sidebar">
+    <nav class="sidebar animated bounceIn">
       <ol>
-        <li v-for="i in tabCount" v-bind:class="{ active:currentTab === i }" v-on:click="currentTab = i" :key="i">
-          <svg class="icon" v-bind:class="'icon-'+icons[i]">
+        <li class="animated" @mouseleave="sidebarAnimate=false" @mouseenter="sidebarAnimate=true" v-for="i in tabCount" v-bind:class="{ active:currentTab === i}" v-on:click="currentTab = i" :key="i">
+          <svg class="icon" v-bind:class="'icon-'+icons[i]" v-bind:clasee="{bounce:sidebarAnimate}">
             <use v-bind:xlink:href="'#icon-'+icons[i]"></use>
           </svg>
-          <p class="tip">{{infoType[i]}}</p>
+          <p class="tip animated" v-bind:class="{bounceIn:sidebarAnimate}">{{infoType[i]}}</p>
         </li>
       </ol>
     </nav>
@@ -52,6 +52,7 @@
     props: ['resume'],
     data() {
       return {
+        sidebarAnimate:false,
         test:'',
         currentTab: 0,
         tabCount: this.initTabcount(),
@@ -100,6 +101,11 @@
   flex-direction: column;
   align-items:center;
   flex: 1;
+  cursor: pointer;
+  transition: .5s
+}
+.sidebar>ol>li:hover{
+  background-color: #475669
 }
 .sidebar>ol>li:first-child{
   margin-top: 16px;
@@ -114,10 +120,18 @@
   font-size: 12px;
   transition: .5s;
   display: none;
+  animation-delay: 0s;
+  animation-duration: 0.5s;
 }
+/* #yourElement {
+  -vendor-animation-duration: 3s;
+  -vendor-animation-delay: 2s;
+  -vendor-animation-iteration-count: infinite;
+} */
 .sidebar:hover .tip{
   display: block;
-  color:#8492A6
+  color:#8492A6;
+  /* transition:.8s */
 }
 .sidebar>ol>li.active {
   background: #fff;
@@ -176,7 +190,9 @@ div>h3:first-child{
   margin-bottom: 20px;
   font-weight: 600;
 }
-
+.one-work-history+.addOneButton{
+  margin: 0 10px;
+}
 
 /* #editor .icon-xiangmu---{
   width: 28px;

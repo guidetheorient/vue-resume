@@ -11,15 +11,15 @@
           <el-input type="textarea" v-model="item[keys[1]]" :autosize="{ minRows: 2, maxRows: 15}"></el-input>
         </el-form-item>
       </div>
-      <el-button type="primary" v-on:click="addItem">再添一项</el-button>
+      <el-button class="addOneButton" type="primary" v-on:click="addItem">再添一项</el-button>
     </el-form>
   </div>
 </template>
 <script>
 export default {
-  props: ['items','labels','title'],
+  props: ['items', 'labels', 'title'],
   computed: {
-    keys(){
+    keys() {
       return (Object.keys(this.items[0]))
     }
   },
@@ -27,13 +27,19 @@ export default {
     addItem() {
       const empty = {}
       this.keys.map((key) => {
-        empty[key] =''
+        empty[key] = ''
       })
       this.items.push(empty)
     },
     removeItem(index) {
-      if (this.items.length>1){
-        this.items.splice(index, 1)        
+      if (this.items.length > 1) {
+        this.items.splice(index, 1)
+      } else {
+        this.$message({
+          message: '只有这一项了',
+          duration: 1000,
+          type: "warning"
+        })
       }
     }
   }

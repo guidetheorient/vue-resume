@@ -20,7 +20,7 @@
                     <el-input v-model="form.username"></el-input>
                 </el-form-item>
                 <el-form-item label="密码">
-                    <el-input v-model="form.password"></el-input>
+                    <el-input @keyup.enter.native="signUp" v-model="form.password"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -29,12 +29,12 @@
             </div>
         </el-dialog>
         <el-dialog v-if="!currentUser" size="tiny" class="login" title="登录" :visible.sync="loginDialogVisible" :modal-append-to-body="false">
-            <el-form :model="form">
+            <el-form v-model="form">
                 <el-form-item label="用户名">
                     <el-input v-model="loginForm.username"></el-input>
                 </el-form-item>
                 <el-form-item label="密码">
-                    <el-input v-model="loginForm.password"></el-input>
+                    <el-input @keyup.enter.native="login" v-model="loginForm.password"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
