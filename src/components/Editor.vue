@@ -1,6 +1,6 @@
 <template>
   <div id="editor">
-    <nav class="sidebar animated" v-cloak>
+    <nav class="sidebar" v-cloak>
       <ol>
         <li class="animated" @mouseleave="sidebarAnimate=false" @mouseenter="sidebarAnimate=true" v-for="i in tabCount" v-bind:class="{ active:currentTab === i}" v-on:click="currentTab = i" :key="i">
           <svg class="icon" v-bind:class="'icon-'+icons[i]" v-bind:clasee="{bounce:sidebarAnimate}">
