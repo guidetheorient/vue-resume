@@ -1,6 +1,6 @@
 <template>
   <div id="editor">
-    <nav class="sidebar animated bounceIn">
+    <nav class="sidebar animated bounceIn" v-cloak>
       <ol>
         <li class="animated" @mouseleave="sidebarAnimate=false" @mouseenter="sidebarAnimate=true" v-for="i in tabCount" v-bind:class="{ active:currentTab === i}" v-on:click="currentTab = i" :key="i">
           <svg class="icon" v-bind:class="'icon-'+icons[i]" v-bind:clasee="{bounce:sidebarAnimate}">
@@ -14,7 +14,7 @@
       <li v-bind:class="{active:currentTab === 0}">
         <ProfileEditor v-bind:profile="resume.profile"/>
         <!-- <ProfileEditor v-bind:profile="resume.profile" @changeBirth="change"/> -->
-        {{test}}
+        <!-- {{test}} -->
       </li>
       <li v-bind:class="{active:currentTab === 1}">
         <WorkEditor v-bind:items="resume.workHistory" v-bind:labels="{duration:'时间',company:'公司',content:'工作内容'}" title="工作经历" />
@@ -53,7 +53,7 @@
     data() {
       return {
         sidebarAnimate:false,
-        test:'',
+        // test:'',
         currentTab: 0,
         tabCount: this.initTabcount(),
         icons: ['shenfen',  'gongzuojingli', 'xiangmu2', 'yinhang-copy','jiangbei', 'lianxifangshi'],
@@ -82,6 +82,9 @@
 </script>
 
 <style>
+[v-cloak]{
+  display: none;
+}
 #editor {
   min-height: 100px;
   display: flex;

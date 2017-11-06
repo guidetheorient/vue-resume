@@ -23,3 +23,6 @@ npm run build --report
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+# 疑难
+1. 本地没有问题，github预览侧边栏会出现马赛克(chrome有问题，edge没问题)
